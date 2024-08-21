@@ -18,7 +18,7 @@ const SelectionPage = () => {
         <div className=" max-w-7xl">
           <div className=" flex">
             <div className=" flex-1 ">
-              <p className=" text-3xl font-bold">Let's get you started</p>
+              <p className=" text-3xl font-bold">Let&apos;s get you started</p>
               <p className=" text-base text-[#D8E4FD]">
                 Supercharge your phone number for Web3
               </p>

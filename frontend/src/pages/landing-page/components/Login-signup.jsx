@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 const LoginSignup = () => {
   const navigate = useNavigate();
 
-  // Generalized navigation function
   const handleNavigation = (path) => {
     navigate(path);
   };
