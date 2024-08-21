@@ -3,6 +3,8 @@ import Header from "../../components/Header";
 import CurrentNum from "../../assets/currentnum.png";
 import VirtualNum from "../../assets/virtualnum.png";
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
+
 
 
 const SelectionPage = () => {
@@ -18,12 +20,12 @@ const SelectionPage = () => {
         <div className=" max-w-7xl">
           <div className=" flex">
             <div className=" flex-1 ">
-              <p className=" text-3xl font-bold">Let&apos;s get you started</p>
-              <p className=" text-base text-[#D8E4FD]">
+              <p className=" text-2xl md:text-3xl font-bold">Let&apos;s get you started</p>
+              <p className=" text-base text-customText">
                 Supercharge your phone number for Web3
               </p>
             </div>
-            <button className="">
+            <motion.button className="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -36,7 +38,7 @@ const SelectionPage = () => {
                   clip-rule="evenodd"
                 />
               </svg>
-            </button>
+            </motion.button>
           </div>
 
           <div className=" md:flex md:gap-6">
@@ -73,8 +75,8 @@ const SelectionPage = () => {
                   Verify the number with a secure OTP sent to your actual mobile
                   number
                 </p>
-                <div className="border-2 border-customBlue hover:bg-customBlue w-full p-2 rounded-full mt-3 ">
-                  <button onClick={() => handleNavigation('/real-number')} className="  font-bold mx-auto flex gap-3 items-center text-center">
+                <motion.button whileTap={{scale : 0.9}} onClick={() => handleNavigation('/real-number')} className="border-2 border-customBlue hover:bg-customBlue w-full p-2 rounded-full mt-3 ">
+                  <p className="  font-bold mx-auto flex justify-center gap-3 items-center text-center">
                     Use Your Current Number
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -88,8 +90,8 @@ const SelectionPage = () => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </button>
-                </div>
+                  </p>
+                </motion.button>
               </div>
             </div>
 
@@ -109,8 +111,8 @@ const SelectionPage = () => {
                 <p className=" text-base text-center text-customText pt-1">
                   Buy a customized 10 digit virtual number of your choice
                 </p>
-                <div className="border-2 border-customBlue hover:bg-customBlue w-full p-2 rounded-full mt-3 ">
-                  <button className="  font-bold mx-auto flex gap-3 items-center text-center">
+                <motion.button whileTap={{scale : 0.9}} className="border-2 border-customBlue hover:bg-customBlue w-full p-2 rounded-full mt-3 ">
+                  <p className="  font-bold mx-auto flex justify-center gap-3 items-center text-center">
                     Get A Virtual Number
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -124,8 +126,8 @@ const SelectionPage = () => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </button>
-                </div>
+                  </p>
+                </motion.button>
               </div>
             </div>
           </div>
