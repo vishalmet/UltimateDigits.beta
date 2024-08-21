@@ -31,7 +31,7 @@ const SelectionPage = () => {
           </div>
 
           <div className=" md:flex md:gap-6">
-          <div className=" bg-[#181931] w-[360px] rounded-xl mt-10">
+          <div className=" bg-[#181931] w-[330px] md:w-[360px] rounded-xl mt-10 mx-auto">
             <div className="">
               <img
                 className=" w-[360px] h-[220px] rounded-t-xl"
@@ -84,7 +84,7 @@ const SelectionPage = () => {
             </div>
           </div>
 
-          <div className=" bg-[#181931] w-[360px] rounded-xl mt-10">
+          <div className=" bg-[#181931] w-[330px] md:w-[360px] rounded-xl mt-10 mx-auto">
             <div className="">
               <img
                 className=" w-[360px] h-[220px] rounded-t-xl"
