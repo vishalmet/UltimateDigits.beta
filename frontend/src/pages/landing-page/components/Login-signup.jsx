@@ -22,7 +22,7 @@ const LoginSignup = () => {
         <p className=" text-2xl lg:text-3xl font-bold text-center pt-3 lg:pt-6">
           Sign Up or Log In
         </p>
-        <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
+        {/* <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
           <motion.button
             onClick={() => handleNavigation('/selection-page')}
             type="button"
@@ -32,8 +32,8 @@ const LoginSignup = () => {
             <img className=" w-6 h-6" src={MetamaskLogo} alt="" />
             Connect with Metamask
           </motion.button>
-        </div>
-        {/* <Wallet /> */}
+        </div> */}
+        <Wallet />
         <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6">
           <motion.button
             whileTap={{ scale: 0.9 }}
