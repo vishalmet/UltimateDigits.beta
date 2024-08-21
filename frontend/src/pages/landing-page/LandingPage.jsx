@@ -5,7 +5,7 @@ import heroImage from "../../assets/heroImage.svg";
 
 const Landing = () => {
   return (
-    <div className="bg-gradient-to-tr from-blue-700 via-blue-950 to-black min-h-screen text-white inter-font">
+    <div className="bg-gradient-to-tr from-blue-700 via-blue-950 to-black h-screen md:min-h-screen text-white inter-font">
       <div className=" mx-3 md:mx-6 lg:mx-10 md:grid md:grid-cols-2">
         <div className=" items-center pt-10">
           <div className=" flex justify-center">

@@ -33,7 +33,7 @@ const OtpPage = () => {
               We&apos;ve sent a confirmation code to <span className="text-customBlue">+91 9359894703</span>
             </p>
           </div>
-          <div className=" pt-10">
+          <div className=" pt-10 mx-4 md:mx-0">
             <p className="text-xl font-medium">Confirmation code</p>
             <input
                 type="tel"
