@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { motion } from "framer-motion";
 import MetamaskLogo from "../assets/Metamask.png";
+import { useNavigate } from "react-router-dom";
 
 import {
   ConnectButton,
@@ -21,6 +22,15 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 const CustomButton = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // If the wallet is connected and the account is available, navigate to the selection page
+    if (window.ethereum && window.ethereum.selectedAddress) {
+      navigate("/selection-page");
+    }
+  }, [navigate]);
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
@@ -35,8 +45,6 @@ const CustomButton = () => {
               authenticationStatus,
               mounted,
             }) => {
-              // Note: If your app doesn't use authentication, you
-              // can remove all 'authenticationStatus' checks
               const ready = mounted && authenticationStatus !== "loading";
               const connected =
                 ready &&
@@ -44,6 +52,13 @@ const CustomButton = () => {
                 chain &&
                 (!authenticationStatus ||
                   authenticationStatus === "authenticated");
+
+              useEffect(() => {
+                if (connected && account?.address) {
+                  // Navigate to selection page when address is available
+                  navigate("/selection-page");
+                }
+              }, [connected, account?.address, navigate]);
 
               return (
                 <div
@@ -93,19 +108,19 @@ const CustomButton = () => {
                     }
 
                     return (
-                        <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
-                          <motion.button
-                            className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-xl border-[#2070F4] border-2 bg-[#2070F4] text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
-                            onClick={openAccountModal}
-                            whileTap={{ scale: 0.9 }}
-                            type="button"
-                          >
-                            {account.displayName}
-                            {account.displayBalance
-                              ? ` (${account.displayBalance})`
-                              : ""}
-                          </motion.button>
-                        </div>
+                      <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
+                        <motion.button
+                          className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-xl border-[#2070F4] border-2 bg-[#2070F4] text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
+                          onClick={openAccountModal}
+                          whileTap={{ scale: 0.9 }}
+                          type="button"
+                        >
+                          {account.displayName}
+                          {account.displayBalance
+                            ? ` (${account.displayBalance})`
+                            : ""}
+                        </motion.button>
+                      </div>
                     );
                   })()}
                 </div>
