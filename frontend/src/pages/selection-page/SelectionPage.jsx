@@ -7,7 +7,7 @@ const SelectionPage = () => {
   return (
     <div className=" bg-gradient-to-tr from-[#06061E] via-[#06061E] to-blue-950 min-h-screen text-white">
       <Header />
-      <div className="flex justify-center items-center pt-16">
+      <div className="flex justify-center items-center py-8 md:pt-16">
         <div className=" max-w-7xl">
           <div className=" flex">
             <div className=" flex-1 ">
@@ -30,7 +30,7 @@ const SelectionPage = () => {
             </svg>
           </div>
 
-          <div className=" md:flex md: gap-6">
+          <div className=" md:flex md:gap-6">
           <div className=" bg-[#181931] w-[360px] rounded-xl mt-10">
             <div className="">
               <img
