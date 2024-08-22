@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { countries } from "../../constants.js";
 import { motion } from "framer-motion";
 
-
 const RealNumber = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
+    // Save the phone number to localStorage
+    localStorage.setItem("phoneNumber", phoneNumber);
     navigate(path);
   };
+  
 
   const handlePhoneNumberChange = (e) => {
     const value = e.target.value;
@@ -24,7 +26,11 @@ const RealNumber = () => {
   return (
     <div className="bg-gradient-to-t from-[#06061E] via-[#06061E] to-blue-950 min-h-screen text-white inter-font">
       <Header />
-      <motion.button onClick={() => handleNavigation('/selection-page')} whileTap={{scale : 0.9}} className=" bg-[#2B324A] p-3 px-5 w-fit rounded-full m-3 lg:m-10 ">
+      <motion.button
+        onClick={() => handleNavigation("/selection-page")}
+        whileTap={{ scale: 0.9 }}
+        className=" bg-[#2B324A] p-3 px-5 w-fit rounded-full m-3 lg:m-10 "
+      >
         <p className=" flex gap-2 text-xs md:text-base font-semibold items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +50,7 @@ const RealNumber = () => {
         </p>
       </motion.button>
       <div className="flex justify-center items-center ">
-        <div className="max-w-7xl">
+        <div className="max-w-7xl mx-4 md:mx-0">
           <div className="flex justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +82,7 @@ const RealNumber = () => {
             <div className="flex items-center ">
               <select
                 id="country"
-                className="bg-[#2B324A] max-w-20 h-12 border border-[#7B8DB7] rounded-l-lg p-2 text-customText"
+                className="bg-[#2B324A] max-w-20 h-12 border border-[#7B8DB7]/20 rounded-l-lg p-2 text-customText"
                 value={selectedCountry}
                 onChange={(e) => setSelectedCountry(e.target.value)}
               >
@@ -92,13 +98,16 @@ const RealNumber = () => {
               <input
                 type="tel"
                 placeholder="Mobile number without country code & spaces"
-                className="bg-[#1F2138] w-full h-12 rounded-r-lg border border-[#7B8DB7] p-2 text-customText"
+                className="bg-[#1F2138] w-full h-12 rounded-r-lg border border-[#7B8DB7]/20 p-2 text-customText"
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
               />
             </div>
-            <motion.button whileTap={{scale : 0.9}}  className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6 ">
-              <p 
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6 "
+            >
+              <p
                 onClick={() => handleNavigation("/otp-page")}
                 className="font-bold flex justify-center mx-auto gap-3 items-center text-center"
               >
