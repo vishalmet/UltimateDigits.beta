@@ -1,20 +1,28 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Header from "../../components/Header";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-
 const OtpPage = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
     navigate(path);
   };
+  useEffect(() => {
+    // Retrieve the phone number from localStorage
+    const storedPhoneNumber = localStorage.getItem("phoneNumber");
+    if (storedPhoneNumber) {
+      setPhoneNumber(storedPhoneNumber);
+    }
+  }, []);
   return (
     <div className=" bg-gradient-to-tr from-[#06061E] via-[#06061E] to-blue-950 min-h-screen text-white inter-font">
       <Header />
       <div className="flex justify-center items-center pt-6 lg:pt-16 ">
-        <div className="max-w-7xl">
+        <div className="max-w-7xl mx-4 md:mx-0">
           <div className="flex justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,19 +44,25 @@ const OtpPage = () => {
               Let&apos;s verify your phone number
             </p>
             <p className="text-base text-customText">
-              We&apos;ve sent a confirmation code to <span className="text-customBlue">+91 9359894703</span>
+              We&apos;ve sent a confirmation code to{" "}
+              <span className="text-customBlue">{phoneNumber || "Enter your Phone Number"}</span>
             </p>
           </div>
-          <div className=" pt-10 mx-4 md:mx-0">
+          <div className=" pt-10">
             <p className="text-xl font-medium">Confirmation code</p>
             <input
-                type="tel"
-                placeholder="Enter 6-digit confirmation code"
-                className="bg-[#1F2138] pt-2 w-full h-12 rounded-lg border border-[#7B8DB7] p-2 text-customText"
-              />
-              <button className=" font-bold text-customBlue pt-6">Resend code</button>
-              <motion.button whileTap={{scale : 0.9}}  className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6 ">
-              <p 
+              type="tel"
+              placeholder="Enter 6-digit confirmation code"
+              className="bg-[#1F2138] pt-2 w-full h-12 rounded-lg border border-[#7B8DB7]/20 p-2 text-customText"
+            />
+            <button className=" font-bold text-customBlue pt-3">
+              Resend code
+            </button>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6 "
+            >
+              <p
                 onClick={() => handleNavigation("/number-linked")}
                 className="font-bold flex justify-center mx-auto gap-3 items-center text-center"
               >
@@ -69,6 +83,11 @@ const OtpPage = () => {
             </motion.button>
           </div>
         </div>
+      </div>
+      <div className=" flex justify-center">
+        <footer className="text-center text-gray-500 absolute bottom-0 p-2">
+          &copy; Ultimate Digits 2024
+        </footer>
       </div>
     </div>
   );

@@ -53,13 +53,16 @@ const CustomButton = () => {
                 (!authenticationStatus ||
                   authenticationStatus === "authenticated");
 
-              useEffect(() => {
-                if (connected && account?.address) {
-                  // Navigate to selection page when address is available
-                  navigate("/selection-page");
-                }
-              }, [connected, account?.address, navigate]);
-
+                  useEffect(() => {
+                    if (connected && account?.address) {
+                      // Store the wallet address in local storage
+                      localStorage.setItem("walletAddress", account.address);
+                  
+                      // Navigate to selection page when address is available
+                      navigate("/selection-page");
+                    }
+                  }, [connected, account?.address, navigate]);
+                  
               return (
                 <div
                   {...(!ready && {
