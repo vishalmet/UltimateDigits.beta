@@ -8,6 +8,10 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   const handleLogout = () => {
     navigate("/"); // Redirect to the home page
   };
@@ -18,7 +22,11 @@ const Header = () => {
 
   return (
     <div className="p-4 px-2 md:px-10 lg:px-24 border-b-2 flex items-center text-white">
-      <motion.button whileTap={{ scale: 0.9 }} className="flex-1">
+      <motion.button
+        onClick={() => handleNavigation("/selection-page")}
+        whileTap={{ scale: 0.9 }}
+        className="flex-1"
+      >
         <img
           className="h-[26px] md:h-[32px] w-[150px] md:w-[216px]"
           src={HeaderLogo}
@@ -46,7 +54,6 @@ const Header = () => {
           />
         </svg>
       </motion.button>
-
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-black max-w-sm w-full">
