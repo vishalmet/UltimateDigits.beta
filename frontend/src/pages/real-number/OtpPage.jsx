@@ -1,9 +1,15 @@
 import React from "react";
 import Header from "../../components/Header";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 
 const OtpPage = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
   return (
     <div className=" bg-gradient-to-tr from-[#06061E] via-[#06061E] to-blue-950 min-h-screen text-white inter-font">
       <Header />
@@ -43,7 +49,7 @@ const OtpPage = () => {
               <button className=" font-bold text-customBlue pt-6">Resend code</button>
               <motion.button whileTap={{scale : 0.9}}  className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6 ">
               <p 
-                onClick={() => handleNavigation("/otp-page")}
+                onClick={() => handleNavigation("/number-linked")}
                 className="font-bold flex justify-center mx-auto gap-3 items-center text-center"
               >
                 Continue
