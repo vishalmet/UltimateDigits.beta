@@ -14,7 +14,7 @@ const Landing = () => {
           <p className=" text-2xl md:text-3xl lg:text-4xl font-bold text-center pt-10">
             Your Mobile Number → Your <br className=" "/>
             <span className=" bg-blue-200 bg-clip-text text-transparent">
-              Crypto Wallet and Web3 Identity{" "}
+              Crypto Wallet and Web3 Identity
             </span>
           </p>
           <div className=" flex justify-center ">
