@@ -111,7 +111,7 @@ const SelectionPage = () => {
                 <p className=" text-base text-center text-customText pt-1">
                   Buy a customized 10 digit virtual number of your choice
                 </p>
-                <motion.button whileTap={{scale : 0.9}} className="border-2 border-customBlue hover:bg-customBlue w-full p-2 rounded-full mt-3 ">
+                <motion.button whileTap={{scale : 0.9}} onClick={() => handleNavigation('/virtual-number')} className="border-2 border-customBlue hover:bg-customBlue w-full p-2 rounded-full mt-3 ">
                   <p className="  font-bold mx-auto flex justify-center gap-3 items-center text-center">
                     Get A Virtual Number
                     <svg
