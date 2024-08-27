@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <div className="p-4 px-2 md:px-10 lg:px-24 border-b-2 flex items-center text-white">
+    <div className="p-4 px-2 md:px-10 lg:px-24 border-b-2 border-white/10 flex items-center text-white">
       <motion.button
         onClick={() => handleNavigation("/selection-page")}
         whileTap={{ scale: 0.9 }}
