@@ -29,7 +29,7 @@ const RealNumber = () => {
       <motion.button
         onClick={() => handleNavigation("/selection-page")}
         whileTap={{ scale: 0.9 }}
-        className=" bg-[#2B324A] p-3 px-5 w-fit rounded-full m-3 lg:m-10 "
+        className=" bg-[#2B324A]/70 p-3 px-5 w-fit rounded-full m-3 lg:m-10 "
       >
         <p className=" flex gap-2 text-xs md:text-base font-semibold items-center">
           <svg
