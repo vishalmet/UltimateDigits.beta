@@ -44,17 +44,19 @@ const SearchResultComp = () => {
             </div>
           </div>
           <div className="">
-            <div className="flex items-center gap-2 md:gap-4">
+            <div className="flex items-center gap-1 md:gap-4 ml-end">
               <div className="flex items-center">
                 <img className="h-8" src={BUSD} alt="BUSD" />
-                <p className="font-bold text-xs md:text-base">BUSD 0</p>
+                <p className="font-bold text-xs md:text-base">
+                  BUSD $10
+                </p>
               </div>
               <motion.button
-                onClick={handleButtonClick}
+                onClick={() => handleButtonClick(item.id)}
                 whileTap={{ scale: 0.9 }}
-                className={`font-bold text-sm md:text-base p-4 rounded-full w-32 md:w-40 transition-colors duration-300 ${
+                className={`font-bold text-xs md:text-base p-4 rounded-full w-32 md:w-40 transition-colors duration-300 ${
                   isAdded
-                    ? "bg-transparent border border-customBlue shadow-customBlue shadow-md"
+                    ? "bg-transparent border border-customBlue text-white shadow-customBlue shadow-md"
                     : "bg-customBlue text-white border border-customBlue"
                 }`}
               >
