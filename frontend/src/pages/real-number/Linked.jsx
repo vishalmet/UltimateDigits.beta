@@ -94,7 +94,7 @@ const Linked = () => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6"
-            onClick={() => handleNavigation("/number-linked")}
+            // onClick={() => handleNavigation("/number-linked")}
           >
             <p className="font-bold flex justify-center mx-auto gap-3 items-center text-center">
               Start Sending Crypto

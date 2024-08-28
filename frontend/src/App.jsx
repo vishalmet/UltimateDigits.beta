@@ -15,11 +15,11 @@ const App = () => {
         <Routes>
           <Route path='/' element={<LandingPage/>}></Route>
           <Route path='/selection-page' element={<SelectionPage />}></Route>
-          <Route path='/real-number' element={<RealNumber/>}></Route>
-          <Route path='/virtual-number' element={<VirtualNumber/>}></Route>
-          <Route path='/otp-page' element={<OtpPage/>}></Route>
-          <Route path='/number-linked' element={<Linked/>}></Route>
-          <Route path='/search-results' element={<SearchResult/>}></Route>
+          <Route path='/selection-page/real-number' element={<RealNumber/>}></Route>
+          <Route path='/selection-page/virtual-number' element={<VirtualNumber/>}></Route>
+          <Route path='/real-number/otp-page' element={<OtpPage/>}></Route>
+          <Route path='/otp-page/number-linked' element={<Linked/>}></Route>
+          <Route path='/virtual-number/search-results' element={<SearchResult/>}></Route>
         </Routes>
       </Router>
     </div>

@@ -116,7 +116,7 @@ const VirtualNumber = () => {
 
                 {/* Search Button */}
                 <motion.button
-                  onClick={() => handleNavigation("/search-results")}
+                  onClick={() => handleNavigation("/virtual-number/search-results")}
                   whileTap={{ scale: 0.9 }}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 h-[72px] rounded-r-lg"
                 >

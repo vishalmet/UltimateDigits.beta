@@ -108,7 +108,7 @@ const RealNumber = () => {
               className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6 "
             >
               <p
-                onClick={() => handleNavigation("/otp-page")}
+                onClick={() => handleNavigation("/real-number/otp-page")}
                 className="font-bold flex justify-center mx-auto gap-3 items-center text-center"
               >
                 Continue
