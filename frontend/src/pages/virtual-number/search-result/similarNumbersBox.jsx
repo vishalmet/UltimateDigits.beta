@@ -41,7 +41,7 @@ const SimilarNumberBox = () => {
   return (
     <div className="text-white">
       <p className="font-bold md:text-xl">Similar Numbers</p>
-      <div className="w-[400px] md:w-[729px] bg-[#2e2e48] border-2 border-[#7B8DB7]/20 rounded-lg mt-3 p-2 md:p-3">
+      <div className="w-[370px] md:w-[729px] bg-[#2e2e48] border-2 border-[#7B8DB7]/20 rounded-lg mt-3 p-2 md:p-3">
         {similarNumbers.map((item) => (
           <div
             key={item.id}

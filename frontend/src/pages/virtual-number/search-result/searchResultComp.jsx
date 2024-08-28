@@ -21,7 +21,7 @@ const SearchResultComp = () => {
 
   return (
     <div className="text-white">
-      <div className=" w-[400px] md:w-[729px] bg-[#2e2e48] border-2 border-[#489D5D] rounded-lg p-1 md:p-3">
+      <div className=" w-[370px] md:w-[729px] bg-[#2e2e48] border-2 border-[#489D5D] rounded-lg p-1 md:p-3">
         <div className="flex items-center">
           <div className="flex flex-1 items-center gap-1 md:gap-6">
             <img className="h-8" src={TickIcon} alt="TickIcon" />
