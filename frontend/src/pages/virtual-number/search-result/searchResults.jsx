@@ -61,10 +61,10 @@ const SearchResult = () => {
               <p className=" text-customText text-center">The number you are looking for is available!</p>
             </div>
 
-            <div className="">
+            <div className="mx-2 md:mx-0">
               <SearchResultComp />
             </div>
-            <div className="pt-2">
+            <div className="pt-2 mx-2 md:mx-0">
                 <SimilarNumberBox />
             </div>
           </div>
