@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { setNumber, selectNumber } from "../../redux/numberSlice";
 import UDlogo from "../../assets/logo.png";
-import Telephone from "../../assets/Telephone.png";
+import Telephone from "../../assets/icons/Telephone.png";
 import Light from "../../assets/light.png";
 import Header from "../../components/Header";
 import VirtualNumberComponent from "./VirtualNumberComponent";
