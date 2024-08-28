@@ -73,7 +73,7 @@ const SimilarNumberBox = () => {
               <motion.button
                 onClick={() => handleButtonClick(item.id)}
                 whileTap={{ scale: 0.9 }}
-                className={`font-bold text-sm md:text-base p-4 rounded-full w-32 md:w-40 transition-colors duration-300 ${
+                className={`font-bold text-xs md:text-base p-4 rounded-full w-32 md:w-40 transition-colors duration-300 ${
                   addedItems[item.id]
                     ? "bg-transparent border border-customBlue text-white shadow-customBlue shadow-md"
                     : "bg-customBlue text-white border border-customBlue"
