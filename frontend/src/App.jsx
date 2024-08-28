@@ -4,7 +4,7 @@ import LandingPage from './pages/landing-page/LandingPage'
 import SelectionPage from './pages/selection-page/SelectionPage'
 import RealNumber from './pages/real-number/RealNumber'
 import VirtualNumber from './pages/virtual-number/VirtualNumber'
-import SearchResult from './pages/virtual-number/searchResults'
+import SearchResult from './pages/virtual-number/search-result/searchResults'
 import OtpPage from './pages/real-number/OtpPage'
 import Linked from './pages/real-number/Linked'
 
