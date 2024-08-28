@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,10 @@ const VirtualNumber = () => {
   const dispatch = useDispatch();
   const storedNumber = useSelector(selectNumber);
   const [inputValue, setInputValue] = useState(storedNumber.replace("+999 ", "")); // Remove +999 when displaying in input
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on component mount
+  }, []);
 
   const formatPhoneNumber = (value) => {
     // Remove any non-digit characters
@@ -40,7 +44,7 @@ const VirtualNumber = () => {
 
   const handleNavigation = (path) => {
     navigate(path);
-    window.scrollTo(0, 0); // Scroll to the top after navigation
+    window.scrollTo(0, 0); // Ensure scroll to top after navigation
   };
 
   return (
