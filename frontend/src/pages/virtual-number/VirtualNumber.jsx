@@ -46,7 +46,7 @@ const VirtualNumber = () => {
     <div className="text-white inter-font">
       <div className="bg-gradient-to-t from-[#06061E] via-[#06061E] to-blue-900 h-full pb-24 ">
         <img
-          className="absolute mx-auto h-[400px] w-[300px] left-0 right-0 top-0"
+          className="absolute mx-auto h-[200px] md:h-[400px] w-[150px] md:w-[300px] left-0 right-0 top-0"
           src={Light}
           alt="spotlight"
         />
