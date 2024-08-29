@@ -1,9 +1,9 @@
 // src/redux/store.js
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
-import { numberSlice } from './numberSlice';
+import numberSlice from './numberSlice';
 
 const persistConfig = {
   key: 'root',
@@ -11,7 +11,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  number: numberSlice.reducer,
+  number: numberSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
