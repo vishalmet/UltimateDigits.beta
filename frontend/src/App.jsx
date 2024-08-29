@@ -7,6 +7,7 @@ import VirtualNumber from './pages/virtual-number/VirtualNumber'
 import SearchResult from './pages/virtual-number/search-result/searchResults'
 import OtpPage from './pages/real-number/OtpPage'
 import Linked from './pages/real-number/Linked'
+import CartCheckout from "./pages/virtual-number/cart/CartCheckout"
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/real-number/otp-page' element={<OtpPage/>}></Route>
           <Route path='/otp-page/number-linked' element={<Linked/>}></Route>
           <Route path='/virtual-number/search-results' element={<SearchResult/>}></Route>
+          <Route path='/virtual-number/search-results/cart-checkout' element={<CartCheckout/>}></Route>
         </Routes>
       </Router>
     </div>
