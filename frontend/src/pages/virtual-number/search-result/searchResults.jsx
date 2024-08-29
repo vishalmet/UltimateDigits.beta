@@ -18,7 +18,7 @@ const SearchResult = () => {
 
   return (
     <div className="text-white inter-font">
-      <div className="bg-gradient-to-t from-[#06061E] via-[#06061E] to-blue-900 min-h-screen pb-24">
+      <div className="bg-gradient-to-t from-[#06061E] via-[#06061E] to-blue-950 min-h-screen pb-24">
         <Header />
         <div className="flex justify-center items-center pt-16">
           <div className="max-w-7xl mx-4 md:mx-0 space-y-3">
