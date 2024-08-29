@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import TickIcon from "../../../assets/icons/tick.png";
 import BUSD from "../../../assets/icons/busd.png";
@@ -6,22 +6,18 @@ import { useSelector } from "react-redux";
 import { selectNumber } from "../../../redux/numberSlice";
 import { motion } from "framer-motion";
 
-const SearchResultComp = () => {
+const SearchResultComp = ({ addedItems, handleButtonClick }) => {
   const navigate = useNavigate();
   const storedNumber = useSelector(selectNumber); // Access the stored phone number
-  const [isAdded, setIsAdded] = useState(false); // State to track if item is added
+  const itemId = "search_result_item"; // Unique identifier for this item
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
-  const handleButtonClick = () => {
-    setIsAdded(!isAdded); // Toggle the state
-  };
-
   return (
     <div className="text-white">
-      <div className=" w-[370px] md:w-[729px] bg-[#2e2e48] border-2 border-[#489D5D] rounded-lg p-1 md:p-3">
+      <div className="w-[370px] md:w-[729px] bg-[#2e2e48] border-2 border-[#489D5D] rounded-lg p-1 md:p-3">
         <div className="flex items-center">
           <div className="flex flex-1 items-center gap-1 md:gap-6">
             <img className="h-8" src={TickIcon} alt="TickIcon" />
@@ -50,15 +46,15 @@ const SearchResultComp = () => {
                 <p className="font-bold text-xs md:text-base">BUSD $10</p>
               </div>
               <motion.button
-                onClick={handleButtonClick}
+                onClick={() => handleButtonClick(itemId)}
                 whileTap={{ scale: 0.9 }}
                 className={`font-bold text-xs md:text-base p-4 rounded-full w-32 md:w-40 transition-colors duration-300 ${
-                  isAdded
+                  addedItems[itemId]
                     ? "bg-transparent border border-customBlue shadow-customBlue shadow-md"
                     : "bg-customBlue text-white border border-customBlue"
                 }`}
               >
-                {isAdded ? "Remove" : "Add to Cart"}
+                {addedItems[itemId] ? "Remove" : "Add to Cart"}
               </motion.button>
             </div>
           </div>
@@ -70,3 +66,4 @@ const SearchResultComp = () => {
 };
 
 export default SearchResultComp;
+  
