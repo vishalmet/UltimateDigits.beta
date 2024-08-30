@@ -30,7 +30,7 @@ const CartCheckout = () => {
               </motion.button>
             </div>
             <div className="border-b border-[#7B8DB7]/20 w-full"></div>
-            <div className="mx-8 md:mx-24 pt-6 md:pt-10 lg:pt-16">
+            <div className="mx-8 md:mx-24 pt-6 md:pt-10">
               <p className="text-2xl md:text-3xl font-bold ">Your Cart</p>
               <p className=" text-customText">
                 Get your exclusive web3 phone number now

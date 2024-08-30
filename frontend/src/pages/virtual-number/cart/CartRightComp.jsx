@@ -57,7 +57,7 @@ const CartRightComp = () => {
           <div className="border-b border-[#7B8DB7]/20 w-full"></div>
         </div>
 
-        <div className="w-[380px] md:w-[600px] mx-auto py-6 lg:pt-0 lg:mt-6 md:mx-aut lg:pb-0">
+        <div className="w-[380px] md:w-[600px] mx-auto py-6 lg:pt-0 lg:mt-10 md:mx-aut lg:pb-0">
           {cartItems.map((item) => (
             <div key={item.id} className="w-full bg-[#2e2e48]/50 rounded-lg border border-[#7B8DB7]/20 p-3 mb-4">
               <div className=" flex justify-between items-center">
