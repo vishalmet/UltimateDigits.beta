@@ -45,7 +45,7 @@ const SimilarNumberBox = ({ addedItems, handleButtonClick }) => {
               <div className="flex items-center gap-1 md:gap-4">
                 <img className="h-6 md:h-8 w-6 md:w-8" src={SimIcon} alt="Sim Icon" />
                 <div className="">
-                  <span className="text-[#A7C3FB] text-xs font-semibold">+999</span>
+                  {/* <span className="text-[#A7C3FB] text-xs font-semibold">+999</span> */}
                   <input
                     type="text"
                     placeholder="XXX XXX XXXX"
