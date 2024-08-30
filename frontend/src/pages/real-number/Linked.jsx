@@ -55,19 +55,20 @@ const Linked = () => {
             </svg>
           </div>
 
-          <div className="text-center">
+          <div className="text-center mx-6 md:mx-0">
             <p className="text-2xl md:text-3xl font-bold">Number linked!</p>
             <p className="text-base text-customText">
               Congratulations! Your phone number has been linked to{" "}
               <br className="hidden lg:flex" /> your chosen wallet address
             </p>
           </div>
-
-          <div className="bg-[#181931] h-[80px] mt-6 p-2 px-4 rounded-lg border border-[#7B8DB7]/20">
+<div className=" flex justify-center">
+          <div className="bg-[#181931] h-[80px] mt-6 p-2 px-4 w-[380px] md:w-full rounded-lg border border-[#7B8DB7]/20">
             <p className="text-xl font-medium">Your current number</p>
             <p className="text-base text-customText pt-1">
               {phoneNumber || "Enter your Phone Number"}
             </p>
+          </div>
           </div>
 
           <div className="flex justify-center py-3">
@@ -84,10 +85,11 @@ const Linked = () => {
               />
             </svg>
           </div>
-          <div className="bg-[#181931] h-[80px] p-2 px-4 rounded-lg border border-[#7B8DB7]/20">
+
+          <div className="bg-[#181931] h-[80px] py-3 md:p-2 px-4 w-[380px] items-center md:w-full rounded-lg border border-[#7B8DB7]/20">
             <p className="text-xl font-medium">Wallet Address</p>
             {/* Display the wallet address fetched from local storage */}
-            <p className="text-base text-customText pt-1">
+            <p className="text-xs md:text-base text-customText pt-1">
               {walletAddress || "No wallet address linked"}
             </p>
           </div>
