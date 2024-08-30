@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectNumber } from "../../../redux/numberSlice";
+import { addItemToCart } from "../../../redux/cartSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Telephone from "../../../assets/icons/Telephone.png";
@@ -10,6 +11,7 @@ import SimilarNumberBox from "./similarNumbersBox";
 
 const SearchResult = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Initialize dispatch
   const storedNumber = useSelector(selectNumber); // Access the stored phone number
   const [addedItems, setAddedItems] = useState({}); // Cart state
   const [showModal, setShowModal] = useState(false); // Modal state
@@ -18,13 +20,13 @@ const SearchResult = () => {
     navigate(path);
   };
 
-  const handleButtonClick = (itemId) => {
+  const handleButtonClick = (itemId, itemData) => {
     setAddedItems((prevItems) => {
       const newItems = {
         ...prevItems,
         [itemId]: !prevItems[itemId],
       };
-
+  
       // Check if the cart is empty after this action
       const totalItemsInCart = Object.values(newItems).filter(Boolean).length;
       if (totalItemsInCart === 0) {
@@ -32,10 +34,17 @@ const SearchResult = () => {
       } else {
         setShowModal(true); // Show the modal when an item is added or removed
       }
-
+  
       return newItems;
     });
+  
+    // Dispatch the item data to Redux store if added to cart
+    if (!addedItems[itemId]) {
+      const itemWithNumericPrice = { ...itemData, price: parseFloat(itemData.price) };
+      dispatch(addItemToCart(itemWithNumericPrice));
+    }
   };
+  
 
   const totalItemsInCart = Object.values(addedItems).filter(Boolean).length;
 
@@ -88,13 +97,22 @@ const SearchResult = () => {
             <div className="mx-2 md:mx-0">
               <SearchResultComp
                 addedItems={addedItems}
-                handleButtonClick={handleButtonClick}
+                handleButtonClick={(itemId) =>
+                  handleButtonClick(itemId, {
+                    id: itemId,
+                    number: storedNumber,
+                    tier: "Diamond Tier", // Example tier
+                    price: 0.1, // Example price
+                  })
+                }
               />
             </div>
             <div className="pt-2 mx-2 md:mx-0">
               <SimilarNumberBox
                 addedItems={addedItems}
-                handleButtonClick={handleButtonClick}
+                handleButtonClick={(itemId, itemData) =>
+                  handleButtonClick(itemId, itemData)
+                }
               />
             </div>
           </div>
@@ -113,7 +131,9 @@ const SearchResult = () => {
               <div className="flex justify-center items-center gap-4">
                 <motion.button
                   onClick={() =>
-                    handleNavigation("/virtual-number/search-results/cart-checkout")
+                    handleNavigation(
+                      "/virtual-number/search-results/cart-checkout"
+                    )
                   }
                   whileTap={{ scale: 0.9 }}
                   className="font-bold text-xs md:text-base p-4 rounded-full bg-customBlue text-white border border-customBlue"
