@@ -6,36 +6,24 @@ import { useNavigate } from "react-router-dom";
 
 import {
   ConnectButton,
-  getDefaultConfig,
-  RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
-import { mainnet, base } from "wagmi/chains";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-
-const config = getDefaultConfig({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
-  chains: [base, mainnet],
-  ssr: true,
-});
-const queryClient = new QueryClient();
+import { useAccount } from "wagmi";
 
 const CustomButton = () => {
   const navigate = useNavigate();
+  const account = useAccount();
 
   useEffect(() => {
-    // If the wallet is connected and the account is available, navigate to the selection page
-    if (window.ethereum && window.ethereum.selectedAddress) {
-      navigate("/selection-page");
+    if(account && account.isConnected) {
+      navigate('/selection-page');
     }
-  }, [navigate]);
+    else {
+      navigate('/');
+    }
+  }, [account, navigate]);
 
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <ConnectButton.Custom>
+    <ConnectButton.Custom>
             {({
               account,
               chain,
@@ -52,17 +40,6 @@ const CustomButton = () => {
                 chain &&
                 (!authenticationStatus ||
                   authenticationStatus === "authenticated");
-
-                  useEffect(() => {
-                    if (connected && account?.address) {
-                      // Store the wallet address in local storage
-                      localStorage.setItem("walletAddress", account.address);
-                  
-                      // Navigate to selection page when address is available
-                      navigate("/selection-page");
-                    }
-                  }, [connected, account?.address, navigate]);
-                  
               return (
                 <div
                   {...(!ready && {
@@ -129,10 +106,7 @@ const CustomButton = () => {
                 </div>
               );
             }}
-          </ConnectButton.Custom>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    </ConnectButton.Custom>
   );
 };
 

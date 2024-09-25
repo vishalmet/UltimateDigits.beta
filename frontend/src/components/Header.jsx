@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderLogo from "../assets/ud-logo.png";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +7,26 @@ import { useAccount, useDisconnect } from "wagmi";
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { disconnect } = useDisconnect();
+  const account = useAccount();
+
+  useEffect(() => {
+    if( account.isDisconnected ) {
+      navigate('/');
+    }
+  }, [account, navigate]);
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
   const handleLogout = () => {
-    navigate("/"); // Redirect to the home page
+    console.log("disconnect");
+    disconnect();
   };
 
   const handleCancel = () => {
-    setShowModal(false); // Hide the modal when cancel is clicked
+    setShowModal(false);
   };
 
   return (

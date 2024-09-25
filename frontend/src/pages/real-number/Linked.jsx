@@ -2,32 +2,19 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "wagmi";
 
 const Linked = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const navigate = useNavigate();
+  const account = useAccount();
 
   const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
-    // Retrieve the wallet address from localStorage
-    const storedAddress = localStorage.getItem("walletAddress");
-    if (storedAddress) {
-      setWalletAddress(storedAddress);
-    }
-
-    // Retrieve the phone number from localStorage
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
     if (storedPhoneNumber) {
       setPhoneNumber(storedPhoneNumber);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Retrieve the wallet address from local storage
-    const storedAddress = localStorage.getItem("walletAddress");
-    if (storedAddress) {
-      setWalletAddress(storedAddress);
     }
   }, []);
 
@@ -90,7 +77,7 @@ const Linked = () => {
             <p className="text-xl font-medium">Wallet Address</p>
             {/* Display the wallet address fetched from local storage */}
             <p className="text-xs md:text-base text-customText pt-1">
-              {walletAddress || "No wallet address linked"}
+              {account.address || "No wallet address linked"}
             </p>
           </div>
           <motion.button
