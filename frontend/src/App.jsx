@@ -9,6 +9,7 @@ import OtpPage from './pages/real-number/OtpPage'
 import Linked from './pages/real-number/Linked'
 import CartCheckout from "./pages/virtual-number/cart/CartCheckout"
 import PurchaseSuccessful from "./pages/virtual-number/purchase-successful/Successful"
+import HomePage from './pages/home-page/HomePage'
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
           <Route path='/virtual-number/search-results' element={<SearchResult/>}></Route>
           <Route path='/virtual-number/search-results/cart-checkout' element={<CartCheckout/>}></Route>
           <Route path='/search-results/cart-checkout/purchase-successful' element={<PurchaseSuccessful/>}></Route>
-          
+          <Route path='/sending-crpto/home-page' element={<HomePage/>}/>
         </Routes>
       </Router>
     </div>
