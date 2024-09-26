@@ -15,7 +15,7 @@ const LoginSignup = () => {
   };
   return (
     <div className="lg:flex lg:justify-center items-center pt-10 lg:pt-0 min-h-screen text-[#3D4043] ">
-      <div className=" bg-white w-[350px] md:w-[500px] h-full mx-auto rounded-xl py-10 lg:py-16">
+      <div className=" bg-white w-[350px] md:w-fit h-full mx-auto rounded-xl p-6 lg:p-10">
         <div className=" flex justify-center">
           <img className=" h-[48px] w-[48px]" src={Logo} alt="" />
         </div>
@@ -34,7 +34,7 @@ const LoginSignup = () => {
           </motion.button>
         </div> */}
         <Wallet />
-        <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6">
+        <div className=" w-[300px] md:w-[400px] flex justify-center mx-auto pt-6">
           <motion.button
             whileTap={{ scale: 0.9 }}
             className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-xl border-[#2070F4] border-2 hover:bg-[#2070F4] hover:text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
