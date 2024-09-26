@@ -54,7 +54,7 @@ const CustomButton = () => {
                   {(() => {
                     if (!connected) {
                       return (
-                        <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
+                        <div className=" w-[300px] md:w-[400px] flex justify-center mx-auto pt-6 lg:pt-10">
                           <motion.button
                             onClick={openConnectModal}
                             type="button"
@@ -74,7 +74,7 @@ const CustomButton = () => {
 
                     if (chain.unsupported) {
                       return (
-                        <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
+                        <div className=" w-[300px] md:w-[400px] flex justify-center mx-auto pt-6 lg:pt-10">
                           <motion.button
                             onClick={openChainModal}
                             type="button"
@@ -88,7 +88,7 @@ const CustomButton = () => {
                     }
 
                     return (
-                      <div className=" w-[300px] md:w-[450px] flex justify-center mx-auto pt-6 lg:pt-10">
+                      <div className=" w-[300px] md:w-[400px] flex justify-center mx-auto pt-6 lg:pt-10">
                         <motion.button
                           className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-xl border-[#2070F4] border-2 bg-[#2070F4] text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
                           onClick={openAccountModal}
