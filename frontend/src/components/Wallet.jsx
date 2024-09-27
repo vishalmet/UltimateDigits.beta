@@ -39,7 +39,7 @@ const CustomButton = ({ setLoading }) => {
         if (!userExists) {
           navigate("/selection-page");
         } else {
-          navigate("/selection-page");
+          navigate("/");
         }
       }
       if (!isConnected) {
