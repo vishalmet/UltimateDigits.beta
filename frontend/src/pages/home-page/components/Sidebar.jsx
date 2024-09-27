@@ -59,7 +59,7 @@ export default function Sidebar({
           <h6
             onClick={() => setActiveTab("home")}
             className={`flex items-center gap-4 cursor-pointer font-medium ${
-              activeTab === "home" ? "text-white" : "text-[#7181a5]"
+              activeTab === "home" ? "text-white text-lg" : "text-[#7181a5]"
             }`}
           >
             <RiHome4Fill />
@@ -68,7 +68,7 @@ export default function Sidebar({
           <h6
             onClick={() => setActiveTab("payments")}
             className={`flex items-center gap-4 cursor-pointer font-medium ${
-              activeTab === "payments" ? "text-white" : "text-[#7181a5]"
+              activeTab === "payments" ? "text-white text-lg" : "text-[#7181a5]"
             }`}
           >
             <FaWallet />

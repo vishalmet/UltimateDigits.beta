@@ -41,7 +41,7 @@ const LoginSignup = () => {
         <div className=" w-[300px] md:w-[400px] flex justify-center mx-auto pt-6">
           <motion.button
             whileTap={{ scale: 0.9 }}
-            className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-xl border-[#2070F4] border-2 hover:bg-[#2070F4] hover:text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
+            className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-md border-[#2070F4] border-2 hover:bg-[#2070F4] hover:text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
           >
             <img className=" w-6 h-6" src={Logo} alt="" />
             Connect with Ultimate Wallet
