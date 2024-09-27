@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
-import { countries } from "../../constants.js";
+import { countries, GlobalURL } from "../../constants.js";
 import { motion } from "framer-motion";
 
 const RealNumber = () => {
@@ -9,10 +9,43 @@ const RealNumber = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const navigate = useNavigate();
 
-  const handleNavigation = (path) => {
-    // Save the phone number to localStorage
+  const handleOtpSend = async () => {
+    try {
+      const bodyData = {
+        countryCode: selectedCountry,
+      phoneNumber: phoneNumber
+      }; 
+      const response = await fetch(`${GlobalURL}/twilio-sms/sendotp`, {
+        method: "POST",
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(bodyData)
+      });
+      const result = await response.json();
+      if (response.ok && result.sid) {
+        console.log('OTP sent successfully:', result);
+        return true;
+      } else {
+        console.error("Failed to send OTP:", result);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error checking user existence", error);
+      return false;
+    }
+  }
+
+  const handleNavigation = async (path) => {
     localStorage.setItem("phoneNumber", phoneNumber);
-    navigate(path);
+    localStorage.setItem("countryCode", selectedCountry);
+    const otpSent = await handleOtpSend();
+    if(otpSent){
+      navigate(path);
+    }
+    else{
+      alert("Failed to send OTP! Please try again.")
+    }
   };
   
 

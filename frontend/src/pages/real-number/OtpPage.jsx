@@ -2,22 +2,67 @@ import React, {useState, useEffect} from "react";
 import Header from "../../components/Header";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { GlobalURL } from "../../constants";
+import { useAccount } from "wagmi";
 
 const OtpPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
+  const [otp, setOtp] = useState("");
+  const account = useAccount();
 
   const navigate = useNavigate();
 
-  const handleNavigation = (path) => {
-    navigate(path);
+  const verifyOtpSent = async () => {
+    try {
+      const bodyData = {
+        countryCode: countryCode,
+        phoneNumber: phoneNumber,
+        otp: otp,
+        address: walletAddress
+      }; 
+      const response = await fetch(`${GlobalURL}/twilio-sms/verify-otp`, {
+        method: "POST",
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(bodyData)
+      });
+      const result = await response.json();
+      if (response.ok && result.status === 'approved') {
+        console.log('OTP verified successfully:', result);
+        return true;
+      } else {
+        console.error("Failed to verify OTP:", result);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error checking user existence", error);
+      return false;
+    }
+  }
+  const handleNavigation = async (path) => {
+    const isVerified = await verifyOtpSent();
+    if(isVerified){
+      navigate(path);
+    }
+    else {
+      alert("OTP verification failed. Please try again.");
+    }
   };
+
   useEffect(() => {
     // Retrieve the phone number from localStorage
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
-    if (storedPhoneNumber) {
+    const storedCountryCode = localStorage.getItem("countryCode");
+    if (storedPhoneNumber && storedCountryCode) {
       setPhoneNumber(storedPhoneNumber);
+      setCountryCode(storedCountryCode);
+      setWalletAddress(account.address);
     }
   }, []);
+
   return (
     <div className=" bg-gradient-to-tr from-[#06061E] via-[#06061E] to-blue-950 min-h-screen text-white inter-font">
       <Header />
@@ -45,7 +90,7 @@ const OtpPage = () => {
             </p>
             <p className="text-base text-customText">
               We&apos;ve sent a confirmation code to{" "}
-              <span className="text-customBlue">{phoneNumber || "Enter your Phone Number"}</span>
+              <span className="text-customBlue">{ `+ ${countryCode} ${phoneNumber}` || "Enter your Phone Number"}</span>
             </p>
           </div>
           <div className=" pt-10">
@@ -54,6 +99,9 @@ const OtpPage = () => {
               type="tel"
               placeholder="Enter 6-digit confirmation code"
               className="bg-[#1F2138] pt-2 w-full h-12 rounded-lg border border-[#7B8DB7]/20 p-2 text-customText"
+              id="otp"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
             />
             <button className=" font-bold text-customBlue pt-3">
               Resend code
