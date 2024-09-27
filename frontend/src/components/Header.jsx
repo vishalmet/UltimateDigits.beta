@@ -14,14 +14,13 @@ const Header = () => {
     if( account.isDisconnected ) {
       navigate('/');
     }
-  }, [account, navigate]);
+  }, [account.isDisconnected, navigate]);
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
   const handleLogout = () => {
-    console.log("disconnect");
     disconnect();
   };
 
