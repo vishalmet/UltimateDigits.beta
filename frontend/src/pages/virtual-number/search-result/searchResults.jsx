@@ -1,52 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectNumber } from "../../../redux/numberSlice";
-import { addItemToCart } from "../../../redux/cartSlice";
+import { addItemToCart, clearCart, selectCartItems } from "../../../redux/cartSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Telephone from "../../../assets/icons/Telephone.png";
 import Header from "../../../components/Header";
 import SearchResultComp from "./searchResultComp";
-import SimilarNumberBox from "./similarNumbersBox";
+import { generateDiamondNumbers } from '../../../functions/diamond-numbers/generateDiamondNumbers';
+import { generateGoldNumbers } from '../../../functions/gold-numbers/generateGoldNumbers';
+import { generateSilverNumbers } from '../../../functions/silver-numbers/generateSilverNumbers';
+import { generateRandomNumbers } from '../../../functions/random-numbers/generateRandomNumbers';
+import { GlobalURL } from "../../../constants";
+import axios from "axios";
 
 const SearchResult = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Initialize dispatch
-  const storedNumber = useSelector(selectNumber); // Access the stored phone number
-  const [addedItems, setAddedItems] = useState({}); // Cart state
-  const [showModal, setShowModal] = useState(false); // Modal state
+  const dispatch = useDispatch();
+  const storedNumber = useSelector(selectNumber);
+  const cart = useSelector(selectCartItems);
+  const [showModal, setShowModal] = useState(false);
+  const searchParams = new URLSearchParams(window.location.search);
+  const [queryParam, setQueryParam] = useState(searchParams.get("n") || "");
+  const [generatedNumbers, setGeneratedNumbers] = useState([]);
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
-  const handleButtonClick = (itemId, itemData) => {
-    setAddedItems((prevItems) => {
-      const newItems = {
-        ...prevItems,
-        [itemId]: !prevItems[itemId],
-      };
-  
-      // Check if the cart is empty after this action
-      const totalItemsInCart = Object.values(newItems).filter(Boolean).length;
-      if (totalItemsInCart === 0) {
-        setShowModal(false); // Close the modal if the cart is empty
+  const generateNumbers = async () => {
+    try {
+      const nums = await generateDiamondNumbers(queryParam);
+      const nums2 = await generateGoldNumbers(queryParam);
+      const nums3 = await generateSilverNumbers(queryParam);
+      const nums4 = generateRandomNumbers();
+
+      setGeneratedNumbers([...nums, ...nums2, ...nums3, ...nums4]);    
+    } catch (error) {
+      console.error("Error generating numbers:", error);
+    }
+  };
+
+  const checkAccFunc = async () => {
+    try {
+      const res = await axios.post(`${GlobalURL}/coinbase/getvirtuals`, {
+        number: queryParam,
+      });
+
+      if (res.status === 204) {
+        setAva(true);
       } else {
-        setShowModal(true); // Show the modal when an item is added or removed
+        setAva(false);
       }
-  
-      return newItems;
-    });
-  
-    // Dispatch the item data to Redux store if added to cart
-    if (!addedItems[itemId]) {
-      const itemWithNumericPrice = { ...itemData, price: parseFloat(itemData.price) };
-      dispatch(addItemToCart(itemWithNumericPrice));
+    } catch (error) {
+      console.log("errror in checking numnber", error);
     }
   };
   
+  const [ava, setAva] = useState(true);
+  useEffect(() => {
+    console.log("Cart", cart);
+    setShowModal(cart.length > 0);
+  }, [cart]);
+  useEffect(() => {
+    setQueryParam(searchParams.get("n"));
+    generateNumbers();
+    console.log("queryParam", queryParam);
+    console.log("AVA", ava);
+    console.log("generatedNumbers", generatedNumbers);
+    checkAccFunc();
+    dispatch(clearCart());
+  }, [queryParam]);
 
-  const totalItemsInCart = Object.values(addedItems).filter(Boolean).length;
 
   return (
     <div className="text-white inter-font">
@@ -67,11 +92,11 @@ const SearchResult = () => {
                     Phone number
                   </label>
                   <div className="flex items-center">
-                    <input
+                  <input
                       type="text"
                       placeholder="XXX XXX XXXX"
-                      value={storedNumber}
-                      readOnly
+                      value={storedNumber} // Use state for the input value
+                      onChange={(e) => dispatch(selectNumber(e.target.value))} // Update state on change
                       className="bg-transparent border-none text-customText font-medium focus:outline-none focus:ring-0 w-full"
                     />
                   </div>
@@ -96,24 +121,26 @@ const SearchResult = () => {
 
             <div className="mx-2 md:mx-0">
               <SearchResultComp
-                addedItems={addedItems}
-                handleButtonClick={(itemId) =>
-                  handleButtonClick(itemId, {
-                    id: itemId,
-                    number: storedNumber,
-                    tier: "Diamond Tier", // Example tier
-                    price: 0.1, // Example price
-                  })
-                }
+                number = {queryParam}
+                showAvailability={true}
+                available={ava}
               />
+
             </div>
             <div className="pt-2 mx-2 md:mx-0">
-              <SimilarNumberBox
-                addedItems={addedItems}
-                handleButtonClick={(itemId, itemData) =>
-                  handleButtonClick(itemId, itemData)
-                }
-              />
+            <p className="text-center font-bold md:text-xl">Similar Numbers</p>
+            <div className="w-[370px] md:w-full bg-[#2e2e48] border-2 border-[#7B8DB7]/20 rounded-lg mt-3 p-2 md:p-3">
+                {generatedNumbers.map(
+                    (number, i) =>
+                      queryParam !== number && (
+                        <SearchResultComp
+                          number={number}
+                          showAvailability={false}
+                          key={i}
+                        />
+                      )
+                  )}
+              </div>
             </div>
           </div>
         </div>
@@ -143,7 +170,7 @@ const SearchResult = () => {
                 <p className="text-white text-sm md:text-base font-bold flex items-center">
                   Your Cart:
                   <div className="text-[#508FF6] bg-[#639BF7]/40 h-10 w-10 rounded-full flex items-center justify-center ml-2">
-                    {totalItemsInCart}
+                    {cart.length}
                   </div>
                 </p>
               </div>

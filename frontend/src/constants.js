@@ -1,3 +1,4 @@
+export const GlobalURL = "http://localhost:8000";
 export const countries = [
     { name: "Afghanistan", code: "93" },
     { name: "Albania", code: "355" },
