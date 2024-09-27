@@ -1,18 +1,22 @@
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { RiHome4Fill } from "react-icons/ri";
 import { FaWallet, FaLock } from "react-icons/fa";
 import { IoCall, IoNotifications } from "react-icons/io5";
-import { RiMessage2Fill, RiLogoutBoxRLine } from "react-icons/ri";
-import { AiOutlineClose } from "react-icons/ai"; // Importing close icon
-
+import { AiOutlineClose } from "react-icons/ai";
 import udlogo from "../../../assets/ud-logo.png";
+import { RiMessage2Fill, RiLogoutBoxRLine } from "react-icons/ri";
 
-export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
+export default function Sidebar({
+  isSidebarOpen,
+  toggleSidebar,
+  activeTab,
+  setActiveTab,
+}) {
   const sidebarRef = useRef(null);
 
   const handleClickOutside = (event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-      toggleSidebar(); // Close the sidebar when clicking outside
+      toggleSidebar();
     }
   };
 
@@ -52,14 +56,23 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
           </button>
         </div>
         <div className="flex flex-col gap-6 pt-14 pl-3">
-          <h6 className="flex items-center text-white font-medium gap-4">
+          <h6
+            onClick={() => setActiveTab("home")}
+            className={`flex items-center gap-4 cursor-pointer font-medium ${
+              activeTab === "home" ? "text-white" : "text-[#7181a5]"
+            }`}
+          >
             <RiHome4Fill />
             Home
           </h6>
-          <h6 className="flex items-center text-[#7181a5]  gap-4">
+          <h6
+            onClick={() => setActiveTab("payments")}
+            className={`flex items-center gap-4 cursor-pointer font-medium ${
+              activeTab === "payments" ? "text-white" : "text-[#7181a5]"
+            }`}
+          >
             <FaWallet />
-            <p className="font-medium">Payments</p>
-            
+            Payments
           </h6>
           <h6 className="flex items-center text-[#7181a5] font-medium gap-4">
             <IoNotifications />

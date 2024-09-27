@@ -30,9 +30,8 @@ const App = () => {
           <Route path='/virtual-number/search-results/cart-checkout' element={<CartCheckout/>}></Route>
           <Route path='/search-results/cart-checkout/mint-number' element={<MintNumber/>}></Route>
           <Route path='/search-results/cart-checkout/purchase-successful' element={<PurchaseSuccessful/>}></Route>
-
-          <Route path='/sending-crpto/home-page' element={<HomePage/>}/>
-
+          <Route path="/sending-crpto/home-page" element={<HomePage />} />
+          <Route path="/sending-crpto/payment-realnumber" element={<HomePage activeTab="payments" />} />
         </Routes>
       </Router>
     </div>
