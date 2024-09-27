@@ -21,14 +21,14 @@ const Payment = () => {
 
   return (
     <div className="pt-8 ">
-      <div className="border-b border-[#7181a5] px-5 pb-6 w-fit">
+      <div className="border-b border-[#7181a5] px-5 pb-6 w-full">
         <h1 className="text-3xl font-semibold text-white">Payments</h1>
         <p className="text-customText pt-1">
           Start sending people crypto through their numbers
         </p>
       </div>
 
-      <div className=" py-6 border-b border-[#7181a5] px-5 w-fit">
+      <div className=" py-6 border-b border-[#7181a5] px-5 w-full">
         <div className="flex bg-[#121735] w-fit rounded-full">
           <button
             className={`p-3 w-fit rounded-full ${

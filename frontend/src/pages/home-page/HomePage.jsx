@@ -56,7 +56,7 @@ const HomePage = ({ activeTab: defaultActiveTab }) => {
   };
 
   return (
-    <div className="flex h-screen md:overflow-hidden">
+    <div className="flex h-screen md:overflow-hidden inter-font">
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}

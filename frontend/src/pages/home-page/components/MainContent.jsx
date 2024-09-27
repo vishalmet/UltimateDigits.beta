@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaWallet } from "react-icons/fa";
 import { motion } from "framer-motion";
-import numbersData from "./numbers.json"; 
+import numbersData from "./numbers.json";
 
 const MainContent = () => {
   const [numbers, setNumbers] = useState([]);
 
   useEffect(() => {
-    
+
     setNumbers(numbersData);
   }, []);
 
@@ -103,10 +103,12 @@ const MainContent = () => {
           </div>
         </div>
         <div className="bg-[#121735] p-4 flex flex-col gap-6 w-fit sm:w-96 rounded-xl">
-          <FaWallet className="text-[#7181a5]" />
-          <h4 className="text-white font-semibold text-xl">Metamask Wallet</h4>
+          <div className=" flex gap-2 items-center ">
+            <FaWallet className="text-white" />
+            <h4 className="text-white font-semibold text-xl">Metamask Wallet</h4>
+          </div>
           <p className="text-customText">0xJ93NBF9HEHU887ENNJD93NM2U983849R</p>
-          <div>
+          <div className=" flex gap-1">
             <p className="text-customText">0.00263479823784</p>
             <p className="text-customText">ETH</p>
           </div>
