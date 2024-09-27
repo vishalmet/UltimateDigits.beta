@@ -8,19 +8,47 @@ import {
   ConnectButton,
 } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-
-const CustomButton = () => {
+import { GlobalURL } from "../constants";
+const CustomButton = ({ setLoading } ) => {
   const navigate = useNavigate();
-  const account = useAccount();
+  const { address, isConnected } = useAccount();
+
+  const checkIfUserExists = async (address) => {
+    try {
+      const response = await fetch(`${GlobalURL}/user/getUser/${address}`);
+      const data = await response.json();
+      console.log("User Data:", data.data);
+
+      return data.exists;
+    } catch (error) {
+      console.error("Error checking user existence", error);
+      return true;
+    }
+  };
+
 
   useEffect(() => {
-    if(account && account.isConnected) {
-      navigate('/selection-page');
-    }
-    else {
-      navigate('/');
-    }
-  }, [account, navigate]);
+    const handleNavigation = async () => {
+      if (isConnected && address) {
+        setLoading(true);
+        console.log("Checking user existence...");
+
+        const userExists = await checkIfUserExists(address);
+        setLoading(false);
+
+        if (!userExists) {
+          navigate("/selection-page");
+        } else {
+          navigate("/");
+        }
+      }
+      if (!isConnected) {
+        navigate("/");
+      }
+    };
+
+    handleNavigation();
+  }, [isConnected, address, navigate]);
 
   return (
     <ConnectButton.Custom>

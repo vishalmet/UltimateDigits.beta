@@ -2,34 +2,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import SimIcon from "../../../assets/icons/sim.png";
-import BUSD from "../../../assets/icons/busd.png";
+import BASE from "../../../assets/base.webp";
 import { motion } from "framer-motion";
 import DiamondTier from "./tiers-components/diamondTier";
 import SilverTier from "./tiers-components/silverTier";
 import BronzeTier from "./tiers-components/bronzeTier";
 import GoldTier from "./tiers-components/goldTier";
-import similarNumbers from "./data/data.json";
+import checkTier from "../../../functions/checkTier";
+import checkPrice from "../../../functions/checkPrice";
 import { selectCartItems } from "../../../redux/cartSlice";
 
-const SimilarNumberBox = ({ addedItems, handleButtonClick }) => {
+const SimilarNumberBox = ({ addedItems, handleButtonClick, similarNumbers }) => {
   const cartItems = useSelector(selectCartItems); // Get cart items from Redux
-
-  // Function to select the appropriate tier component
-  const renderTierComponent = (tier) => {
-    switch (tier) {
-      case "Diamond Tier":
-        return <DiamondTier />;
-      case "Gold Tier":
-        return <GoldTier />;
-      case "Silver Tier":
-        return <SilverTier />;
-      case "Bronze Tier":
-        return <BronzeTier />;
-      default:
-        return null;
-    }
-  };
-
+  
   return (
     <div className="text-white">
       <p className="font-bold md:text-xl">Similar Numbers</p>
@@ -49,20 +34,30 @@ const SimilarNumberBox = ({ addedItems, handleButtonClick }) => {
                   <input
                     type="text"
                     placeholder="XXX XXX XXXX"
-                    value={item.number}
+                    value={`+999 ${item}`}
                     readOnly
                     className="bg-transparent border-none text-white text-xs md:text-base font-medium focus:outline-none focus:ring-0 w-full"
                   />
-                  {renderTierComponent(item.tier)}
+                  {checkTier(item) === 'diamond' ? (
+                    <DiamondTier />
+                  ) : checkTier(item) === 'golden' ? (
+                    <GoldTier />
+                  ) : checkTier(item) === 'silver' ? (
+                    <SilverTier />
+                  ) : checkTier(item) === 'bronze' ? (
+                    <BronzeTier />
+                  ) : (
+                    "NA"
+                  )}
                 </div>
               </div>
 
               {/* Container for Price and Button */}
               <div className="flex items-center gap-1 md:gap-4 ml-end">
                 <div className="flex items-center">
-                  <img className="h-8" src={BUSD} alt="BUSD" />
+                  <img className="h-8" src={BASE} alt="BASE" />
                   <p className="font-bold text-xs md:text-base">
-                    BUSD ${item.price}
+                    ETH $ {checkPrice(item)}
                   </p>
                 </div>
                 <motion.button
