@@ -51,7 +51,7 @@ const VirtualNumber = () => {
     <div className="text-white inter-font">
       <div className="bg-gradient-to-t from-[#06061E] via-[#06061E] to-blue-950 h-full pb-24 ">
         <img
-          className="absolute mx-auto h-[200px] md:h-[400px] w-[150px] md:w-[300px] left-0 right-0 top-0"
+          className="absolute mx-auto h-[200px] md:h-[200px] w-[150px] md:w-[300px] left-0 right-0 top-0"
           src={Light}
           alt="spotlight"
         />
@@ -116,7 +116,7 @@ const VirtualNumber = () => {
 
                 {/* Search Button */}
                 <motion.button
-                  onClick={() => handleNavigation("/virtual-number/search-results")}
+                  onClick={() => handleNavigation(`/virtual-number/search-results?n=${inputValue}`)}
                   whileTap={{ scale: 0.9 }}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 h-[72px] rounded-r-lg"
                 >
