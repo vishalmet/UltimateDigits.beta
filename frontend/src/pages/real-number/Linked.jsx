@@ -10,11 +10,14 @@ const Linked = () => {
   const account = useAccount();
 
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("");
 
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
-    if (storedPhoneNumber) {
+    const storedCountryCode = localStorage.getItem("countryCode");
+    if (storedPhoneNumber && storedCountryCode) {
       setPhoneNumber(storedPhoneNumber);
+      setCountryCode(storedCountryCode);
     }
   }, []);
 
@@ -49,13 +52,13 @@ const Linked = () => {
               <br className="hidden lg:flex" /> your chosen wallet address
             </p>
           </div>
-<div className=" flex justify-center">
-          <div className="bg-[#181931] h-[80px] mt-6 p-2 px-4 w-[380px] md:w-full rounded-lg border border-[#7B8DB7]/20">
-            <p className="text-xl font-medium">Your current number</p>
-            <p className="text-base text-customText pt-1">
-              {phoneNumber || "Enter your Phone Number"}
-            </p>
-          </div>
+          <div className=" flex justify-center">
+            <div className="bg-[#181931] h-[80px] mt-6 p-2 px-4 w-[380px] md:w-full rounded-lg border border-[#7B8DB7]/20">
+              <p className="text-xl font-medium">Your current number</p>
+              <p className="text-base text-customText pt-1">
+                {`+ ${countryCode} ${phoneNumber}` || "Enter your Phone Number"}
+              </p>
+            </div>
           </div>
 
           <div className="flex justify-center py-3">

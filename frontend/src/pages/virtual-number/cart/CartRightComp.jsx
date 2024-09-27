@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectCartItems, removeItemFromCart } from "../../../redux/cartSlice";
 import { motion } from "framer-motion";
 import TickIcon from "../../../assets/icons/tick.png";
-import BUSD from "../../../assets/icons/busd.png";
+import BASE from "../../../assets/base.webp"
 import DiamondTier from "../search-result/tiers-components/diamondTier";
 import GoldTier from "../search-result/tiers-components/goldTier";
 import SilverTier from "../search-result/tiers-components/silverTier";
 import BronzeTier from "../search-result/tiers-components/bronzeTier";
 import { useNavigate } from "react-router-dom";
+import checkPrice from "../../../functions/checkPrice";
+import checkTier from "../../../functions/checkTier";
 
 const CartRightComp = () => {
   const navigate = useNavigate();
@@ -20,19 +22,19 @@ const CartRightComp = () => {
     window.scrollTo(0, 0); // Ensure scroll to top after navigation
   };
 
-  const handleRemove = (id) => {
-    dispatch(removeItemFromCart(id));
+  const handleRemove = (item) => {
+    dispatch(removeItemFromCart(item));
   };
 
   const renderTierComponent = (tier) => {
     switch (tier) {
-      case "Diamond Tier":
+      case "diamond":
         return <DiamondTier />;
-      case "Gold Tier":
+      case "golden":
         return <GoldTier />;
-      case "Silver Tier":
+      case "silver":
         return <SilverTier />;
-      case "Bronze Tier":
+      case "bronze":
         return <BronzeTier />;
       default:
         return null;
@@ -59,19 +61,19 @@ const CartRightComp = () => {
 
         <div className="w-[380px] md:w-[600px] mx-auto py-6 lg:pt-0 lg:mt-10 md:mx-aut lg:pb-0">
           {cartItems.map((item) => (
-            <div key={item.id} className="w-full bg-[#2e2e48]/50 rounded-lg border border-[#7B8DB7]/20 p-3 mb-4">
+            <div key={item} className="w-full bg-[#2e2e48]/50 rounded-lg border border-[#7B8DB7]/20 p-3 mb-4">
               <div className=" flex justify-between items-center">
                 <div className=" flex gap-3 items-center">
                   <img className=" h-6 md:h-8 w-6 md:w-8" src={TickIcon} alt="" />
                   <div className="">
                     <p className=" font-bold text-xs md:text-base">
-                      {item.number}
+                      +999 {item}
                     </p>
                     <div className="md:flex gap-2 space-y-2 md:space-y-0">
                       <p className="bg-[#489D5D] w-fit h-fit text-xs p-1 px-2 rounded-full font-bold">
                         Available
                       </p>
-                      {renderTierComponent(item.tier)}
+                      {renderTierComponent(checkTier(item))}
                     </div>
                   </div>
                 </div>
@@ -80,10 +82,10 @@ const CartRightComp = () => {
                     <div className="flex items-center">
                       <img
                         className="h-6 md:h-8 w-6 md:w-8"
-                        src={BUSD}
-                        alt="BUSD"
+                        src={BASE}
+                        alt="BASE"
                       />
-                      <p className=" font-bold text-xs md:text-base">BUSD {item.price.toFixed(2)}</p>
+                      <p className=" font-bold text-xs md:text-base">ETH {parseFloat(checkPrice(item)).toFixed(3)}</p>
                     </div>
                     <p className=" text-customText text-xs md:text-base flex justify-end">
                       Total due
@@ -91,7 +93,7 @@ const CartRightComp = () => {
                   </div>
                   <motion.button
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => handleRemove(item.id)}
+                    onClick={() => handleRemove(item)}
                     className=" font-bold text-xs md:text-base p-3 rounded-full w-24 md:w-32 border border-customBlue shadow-md hover:shadow-customBlue"
                   >
                     Remove
@@ -102,7 +104,7 @@ const CartRightComp = () => {
           ))}
           <div className="  pt-5">
             <motion.button
-              onClick={() => handleNavigation("/search-results/cart-checkout/purchase-successful")}
+              onClick={() => handleNavigation("/search-results/cart-checkout/mint-number")}
               whileTap={{ scale: 0.9 }}
               className={`font-bold text-xs md:text-base p-3 w-full rounded-full bg-customBlue text-white border border-customBlue`}
             >

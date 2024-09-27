@@ -6,10 +6,12 @@ import SimIcon from "../../../assets/icons/sim.png";
 import HeaderLogo from "../../../assets/ud-logo.png";
 import { motion } from "framer-motion";
 import CartRightComp from "./CartRightComp";
+import checkPrice from "../../../functions/checkPrice";
+import checkTier from "../../../functions/checkTier";
 
 const CartCheckout = () => {
   const cartItems = useSelector(selectCartItems);
-
+  const discountValue = 0.001;
   return (
     <div className="text-white inter-font">
       <div className="lg:grid lg:grid-cols-5">
@@ -39,22 +41,26 @@ const CartCheckout = () => {
 
               {/* Render items from the cart */}
               {cartItems.map((item) => (
-                <div key={item.id} className=" flex justify-between items-center mb-4">
+                <div key={item} className=" flex justify-between items-center mb-4">
                   <div className="flex items-center gap-3">
                     <img className=" h-6 md:h-8 w-6 md:w-8" src={SimIcon} alt="SimIcon" />
                     <div className="">
                       <p className=" text-base font-bold">
-                        {item.tier} number
+                        {/* {item.tier} number */}
+                        <span className="capitalize">
+                          {checkTier(item)}
+                        </span> number
                       </p>
                       <p className=" text-xs md:text-base text-customText">
-                        {item.number}
+                        {/* {item.number} */}
+                        +999 {item}
                       </p>
                     </div>
                   </div>
                   <div className="">
                     <p className=" font-semibold text-base">
                       {/* Ensure item.price is a number before calling .toFixed() */}
-                      BUSD {typeof item.price === 'number' ? item.price.toFixed(2) : item.price}
+                      ETH {parseFloat(checkPrice(item)).toFixed(3)}
                     </p>
                   </div>
                 </div>
@@ -67,18 +73,21 @@ const CartCheckout = () => {
                 <div className=" flex items-center justify-between">
                   <p className=" text-customText">Subtotal</p>
                   <p className=" font-semibold text-base">
-                    BUSD {cartItems.reduce((total, item) => total + (typeof item.price === 'number' ? item.price : parseFloat(item.price)), 0).toFixed(2)}
+                    {/* BUSD {cartItems.reduce((total, item) => total + (typeof item.price === 'number' ? item.price : parseFloat(item.price)), 0).toFixed(2)} */}
+                    ETH {cartItems.reduce((total, item) => total + (parseFloat(checkPrice(item))), 0).toFixed(3)}
                   </p>
                 </div>
                 <div className=" flex items-center justify-between">
                   <p className=" text-customText">Referral reward</p>
-                  <p className=" font-semibold text-base">BUSD 20.00</p>
+                  <p className=" font-semibold text-base">ETH {discountValue}</p>
                 </div>
                 <div className="border-b-2 border-[#7B8DB7]/20 w-full"></div>
                 <div className="flex items-center justify-between">
                   <p className=" font-bold text-xl">Total</p>
                   <p className="font-semibold text-base">
-                    BUSD {(cartItems.reduce((total, item) => total + (typeof item.price === 'number' ? item.price : parseFloat(item.price)), 0) + 20).toFixed(2)}
+                    ETH {(
+                      cartItems.reduce((total, item) => total + parseFloat(checkPrice(item)), 0) - discountValue
+                    ).toFixed(3)}
                   </p>
                 </div>
               </div>
