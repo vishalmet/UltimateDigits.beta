@@ -13,6 +13,7 @@ import PurchaseSuccessful from "./pages/virtual-number/purchase-successful/Succe
 import HomePage from './pages/home-page/HomePage'
 
 import MintNumber from './pages/virtual-number/purchase-successful/nft/MintNumber'
+import VirtualLinked from './pages/virtual-number/purchase-successful/VirtualLinked'
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path='/selection-page/virtual-number' element={<VirtualNumber/>}></Route>
           <Route path='/real-number/otp-page' element={<OtpPage/>}></Route>
           <Route path='/otp-page/number-linked' element={<Linked/>}></Route>
+          <Route path='/virtual/number-linked' element={<VirtualLinked/>}></Route>
           <Route path='/virtual-number/search-results' element={<SearchResult/>}></Route>
           <Route path='/virtual-number/search-results/cart-checkout' element={<CartCheckout/>}></Route>
           <Route path='/search-results/cart-checkout/mint-number' element={<MintNumber/>}></Route>

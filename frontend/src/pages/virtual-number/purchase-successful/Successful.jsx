@@ -37,13 +37,13 @@ const Successful = () => {
                 <br className=" hidden md:flex" /> phone number.
               </p>
               <div className="  pt-5">
-                {/* <motion.button
+                <motion.button
                   onClick={() => handleNavigation ("/search-results/cart-checkout/purchase-successful")}
                   whileTap={{ scale: 0.9 }}
                   className={`font-bold text-xs md:text-base p-3 w-full rounded-full bg-customBlue text-white border border-customBlue`}
                 >
                   Link your number to a wallet
-                </motion.button> */}
+                </motion.button>
                 {/* <div>
                   <button onClick={() => GetPhoneNumberByWallet(walletAddress)}>
                     Get Phone Numbers

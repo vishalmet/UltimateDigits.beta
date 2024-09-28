@@ -4,11 +4,14 @@ import { formatPhoneNumber } from "../../../../functions/formatPhoneNumber";
 import { useSelector } from "react-redux";
 import { selectCartItems } from "../../../../redux/cartSlice";
 import { useAccount } from "wagmi";
-import { GETPHONENUMBERSBYWALLET, MINTNUMBERNFT } from "../../../../contract/contractIntegration";
+import { MINTNUMBERNFT } from "../../../../contract/contractIntegration";
 import { uploadToIPFS } from "../../../../functions/ipfs/uploadToIPF";
 import { GlobalURL, RECEIVER_ADDRESS } from "../../../../constants";
 import checkTotalPrice from "../../../../functions/checkTotalPrice";
 import { ethers } from "ethers";
+import Header from "../../../../components/Header";
+import NumberNft from "./NumberNft";
+import { motion } from "framer-motion";
 
 const MintNumber = () => {
   const navigate = useNavigate();
@@ -92,7 +95,7 @@ const MintNumber = () => {
         if (response.ok) {
             const data = await response.json();
             setStatus(`Virtual number added successfully. ${data.message}`);
-            navigate('/search-results/cart-checkout/purchase-successful');
+            navigate('/virtual/number-linked');
         } else {
             setStatus(`Failed to add virtual number.`);
         }
@@ -105,49 +108,47 @@ const MintNumber = () => {
 };
 
   return (
-    <div className="bg-gradient-to-tr from-blue-700 via-blue-950 to-black h-screen flex flex-col items-center justify-center pt-[8.2rem]">
-      <h1 className="font-bold text-[32px] leading-[40px] tracking-tight mb-2 text-white">
-        Mint your number
-      </h1>
-      <p className="font-medium text-[16px] leading-[28px] mb-10 text-[#D8E4FD]">
-        You are minting the following numbers:
-        <div className="bg-white mx-5 px-5 py-2 my-2 w-fit rounded-lg">
-          {cartArray.map((number, i) => (
-            <span className="block text-[#5293FF]" key={i}>
-              +999 {`${number && formatPhoneNumber(number.toString())}`}
-            </span>
-          ))}
+    <div className="text-white inter-font">
+      <div className="bg-gradient-to-t from-[#06061E] via-[#06061E] to-blue-950 min-h-screen pb-24">
+        <Header />
+        <div className="flex justify-center items-center pt-16">
+          <div className="max-w-7xl mx-4 md:mx-0 space-y-6">
+            <div className="flex justify-center">
+              <NumberNft />
+            </div>
+            <div className=" text-center">
+              <p className=" font-bold text-3xl">Purchase Confirmation</p>
+              <p className=" text-customText">
+                Number owner will be assigned to the following wallet address:
+              </p>
+              <p className="hidden md:flex font-bold mt-2 text-center"> {account.address}</p>
+              <div className="  pt-5">
+                {loading ? (
+                  <button className="font-bold text-xs md:text-base p-3 w-full rounded-full border border-gray-400 bg-gray-400 text-white" disabled>
+                    Minting...
+                  </button>
+                ) : (
+                  <motion.button
+                    onClick={buynumber}
+                    whileTap={{ scale: 0.9 }}
+                    className={`font-bold text-xs md:text-base p-3 w-full rounded-full bg-customBlue text-white border border-customBlue`}
+                  >
+                    Link your number to a wallet
+                  </motion.button>
+                )}
+
+                <button
+                  className="mt-2 py-2 px-4 bg-red-500 text-white rounded-lg"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+              </div>
+              {status && <p className="text-white mt-4">{status}</p>}
+            </div>
+          </div>
         </div>
-        <br />
-        Number owner will be assigned to the following wallet address:
-        <span className="text-[#5293FF]"> {account.address}</span>
-      </p>
-
-      <div className="flex items-center justify-center space-x-5">
-        {/* Loading state */}
-        {loading ? (
-          <button className="mb-8 py-2 px-4 bg-gray-400 text-white rounded-lg" disabled>
-            Minting...
-          </button>
-        ) : (
-          <button
-            className="mb-8 py-2 px-4 bg-blue-500 text-white rounded-lg"
-            onClick={buynumber}
-          >
-            Confirm
-          </button>
-        )}
-
-        <button
-          className="mb-8 py-2 px-4 bg-red-500 text-white rounded-lg"
-          onClick={() => navigate(-1)}
-        >
-          Cancel
-        </button>
       </div>
-
-      {/* Display minting status or error */}
-      {status && <p className="text-white mt-4">{status}</p>}
     </div>
   );
 };
