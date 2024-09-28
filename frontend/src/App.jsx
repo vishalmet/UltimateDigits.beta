@@ -10,6 +10,7 @@ import Linked from './pages/real-number/Linked'
 import CartCheckout from "./pages/virtual-number/cart/CartCheckout"
 import PurchaseSuccessful from "./pages/virtual-number/purchase-successful/Successful"
 import MintNumber from './pages/virtual-number/purchase-successful/nft/MintNumber'
+import VirtualLinked from './pages/virtual-number/purchase-successful/VirtualLinked'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/selection-page/virtual-number' element={<VirtualNumber/>}></Route>
           <Route path='/real-number/otp-page' element={<OtpPage/>}></Route>
           <Route path='/otp-page/number-linked' element={<Linked/>}></Route>
+          <Route path='/virtual/number-linked' element={<VirtualLinked/>}></Route>
           <Route path='/virtual-number/search-results' element={<SearchResult/>}></Route>
           <Route path='/virtual-number/search-results/cart-checkout' element={<CartCheckout/>}></Route>
           <Route path='/search-results/cart-checkout/mint-number' element={<MintNumber/>}></Route>
