@@ -13,12 +13,12 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { mainnet, base } from "wagmi/chains";
+import { mainnet, base, baseSepolia } from "wagmi/chains";
 
 const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: "YOUR_PROJECT_ID",
-  chains: [base, mainnet],
+  chains: [base, mainnet, baseSepolia],
   ssr: true,
 });
 const queryClient = new QueryClient();
