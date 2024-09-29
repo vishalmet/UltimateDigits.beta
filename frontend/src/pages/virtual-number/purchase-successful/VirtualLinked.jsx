@@ -5,13 +5,17 @@ import { useAccount } from "wagmi";
 import Header from "../../../components/Header";
 import { selectCartItems } from "../../../redux/cartSlice";
 import { useSelector } from "react-redux";
-
+import { formatPhoneNumber } from "../../../functions/formatPhoneNumber";
 const VirtualLinked = () => {
   const navigate = useNavigate();
   const account = useAccount();
 
   const cartArray = useSelector(selectCartItems);
 
+  const formattedPhoneNumbers = cartArray.map((phone) =>
+    formatPhoneNumber(phone)
+  ).join(", ");
+  
   const handleNavigation = (path) => {
     navigate(path);
   };
@@ -47,7 +51,7 @@ const VirtualLinked = () => {
             <div className="bg-[#181931] h-[80px] mt-6 p-2 px-4 w-[380px] md:w-full rounded-lg border border-[#7B8DB7]/20">
               <p className="text-xl font-medium">Your current number</p>
               <p className="text-base text-customText pt-1">
-                {`+999 ${cartArray}` || "Enter your Phone Number"}
+                +999 {formattedPhoneNumbers || "Enter your Phone Number"}
               </p>
             </div>
           </div>
@@ -77,7 +81,7 @@ const VirtualLinked = () => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             className="border-2 border-customBlue bg-customBlue hover:bg-transparent w-full p-2 rounded-full mt-6"
-            // onClick={() => handleNavigation("/number-linked")}
+            onClick={() => handleNavigation("/sending-crpto/home-page")}
           >
             <p className="font-bold flex justify-center mx-auto gap-3 items-center text-center">
               Start Sending Crypto

@@ -15,6 +15,9 @@ const OtpPage = () => {
   const navigate = useNavigate();
 
   const verifyOtpSent = async () => {
+    console.log("country code", countryCode);
+    console.log("phone number", phoneNumber);
+    
     try {
       const bodyData = {
         countryCode: countryCode,

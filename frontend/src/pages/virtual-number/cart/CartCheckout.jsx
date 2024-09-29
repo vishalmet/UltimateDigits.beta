@@ -11,7 +11,7 @@ import checkTier from "../../../functions/checkTier";
 
 const CartCheckout = () => {
   const cartItems = useSelector(selectCartItems);
-  const discountValue = 0.001;
+  const discountValue = 0.000;
   return (
     <div className="text-white inter-font">
       <div className="lg:grid lg:grid-cols-5">
