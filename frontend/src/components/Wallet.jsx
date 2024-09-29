@@ -17,8 +17,6 @@ const CustomButton = ({ setLoading }) => {
     try {
       const response = await fetch(`${GlobalURL}/user/getUser/${address}`);
       const data = await response.json();
-      console.log("User Data:", data.data);
-
       return data.exists;
     } catch (error) {
       console.error("Error checking user existence", error);
@@ -39,7 +37,7 @@ const CustomButton = ({ setLoading }) => {
         if (!userExists) {
           navigate("/selection-page");
         } else {
-          navigate("/");
+          navigate("/sending-crpto/home-page");
         }
       }
       if (!isConnected) {
