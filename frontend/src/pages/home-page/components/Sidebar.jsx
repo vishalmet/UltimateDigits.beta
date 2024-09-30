@@ -5,6 +5,8 @@ import { IoCall, IoNotifications } from "react-icons/io5";
 import { AiOutlineClose } from "react-icons/ai";
 import udlogo from "../../../assets/ud-logo.png";
 import { RiMessage2Fill, RiLogoutBoxRLine } from "react-icons/ri";
+import { useAccount, useDisconnect } from "wagmi";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar({
   isSidebarOpen,
@@ -13,6 +15,9 @@ export default function Sidebar({
   setActiveTab,
 }) {
   const sidebarRef = useRef(null);
+  const { disconnect } = useDisconnect();
+  const account = useAccount();
+  const navigate = useNavigate();
 
   const handleClickOutside = (event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -30,6 +35,16 @@ export default function Sidebar({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isSidebarOpen]);
+
+  useEffect(() => {
+    if( account.isDisconnected ) {
+      navigate('/');
+    }
+  }, [account.isDisconnected, navigate]);
+
+  const handleLogout = () => {
+    disconnect();
+  };
 
   return (
     <aside
@@ -105,7 +120,9 @@ export default function Sidebar({
         </div>
       </div>
 
-      <button className="flex justify-between items-center text-white w-full p-5 bg-[#222945] rounded-lg font-medium mb-4">
+      <button className="flex justify-between items-center text-white w-full p-5 bg-[#222945] rounded-lg font-medium mb-4"
+        onClick={handleLogout}
+      >
         Log out <RiLogoutBoxRLine />
       </button>
     </aside>
